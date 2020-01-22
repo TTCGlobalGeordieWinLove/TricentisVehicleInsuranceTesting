@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 using TricentisVehicleInsurance.Configuration;
 using TricentisVehicleInsurance.Extensions;
+using TricentisVehicleInsurance.Globals;
 using TricentisVehicleInsurance.Setup;
 
 namespace TricentisVehicleInsurance.GeneralHooks
@@ -12,23 +9,31 @@ namespace TricentisVehicleInsurance.GeneralHooks
     [Binding]
     public sealed class GeneralHooks
     {
-        // For additional details on SpecFlow hooks see http://go.specflow.org/doc-hooks
-        [BeforeFeature]
-        public void BeforeFeature(FeatureContext featureContext)
+        [BeforeTestRun]
+        public static void BeforeTestRun()
         {
-            var webDriver = DriverSetup.InitializeWebDriver(AppConfig.Browser);
-            featureContext.AddWebDriver(webDriver);
+            ObjectRepo.SetAppConfigReader(new AppConfigReader());
+        }
+        [BeforeFeature]
+        public static void BeforeFeature(FeatureContext featureContext)
+        {
         }
         [BeforeScenario]
         public void BeforeScenario(ScenarioContext scenarioContext)
         {
-            //TODO: implement logic that has to run before executing each scenario
+            ObjectRepo.SetWebDriver(DriverSetup.InitializeWebDriver(ObjectRepo.ConfigReader.GetBrowser()));
         }
 
         [AfterScenario]
-        public void AfterScenario()
+        public static void AfterScenario()
         {
-            //TODO: implement logic that has to run after executing each scenario
+            ObjectRepo.WebDriver?.Close();
+            ObjectRepo.WebDriver?.Quit();
+        }
+        [AfterTestRun]
+        public static void AfterTestRun()
+        {
+
         }
     }
 }

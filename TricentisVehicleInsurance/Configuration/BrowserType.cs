@@ -6,6 +6,8 @@ namespace TricentisVehicleInsurance.Configuration
 {
     public enum BrowserType
     {
-        Chrome
+        Chrome,
+        Firefox,
+        IExplorer
     }
 }

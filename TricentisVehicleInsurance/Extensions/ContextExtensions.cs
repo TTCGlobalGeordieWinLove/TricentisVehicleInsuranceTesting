@@ -4,6 +4,7 @@ using System.Text;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TricentisVehicleInsurance.Configuration;
+using TricentisVehicleInsurance.PageObject;
 
 namespace TricentisVehicleInsurance.Extensions
 {
@@ -12,25 +13,25 @@ namespace TricentisVehicleInsurance.Extensions
     /// </summary>
     public static class ContextExtensions
     {
-        // The key used to retrieve the WebDriver
-        private static string driver = "__webDriver";
+        // Key for current page.
+        private static readonly string CurrentPage = "__currentPage";
         /// <summary>
-        /// Adds an IWebDriver to the feature context.
+        /// Sets the current page in the ScenarioContext.
         /// </summary>
-        /// <param name="featureContext">The current FeatureContext.</param>
-        /// <param name="webDriver"> The webdriver currently in use.</param>
-        public static void AddWebDriver(this FeatureContext featureContext, IWebDriver webDriver)
+        /// <param name="scenarioContext">The current ScenarioContext.</param>
+        /// <param name="page">The current page.</param>
+        public static void SetCurrentPage(this ScenarioContext scenarioContext, BasePage page)
         {
-            featureContext[driver] = webDriver;
+            scenarioContext[CurrentPage] = page;
         }
         /// <summary>
-        /// Retrieves the webdriver from the feature context.
+        /// Retrieves the current page.
         /// </summary>
-        /// <param name="featureContext">The current FeatureContext.</param>
-        /// <returns>The currently used webdriver.</returns>
-        public static IWebDriver GetWebDriver(this FeatureContext featureContext)
+        /// <param name="scenarioContext">The current ScenarioContext.</param>
+        /// <returns>The object representing the current page.</returns>
+        public static BasePage GetCurrentPage(this ScenarioContext scenarioContext)
         {
-            return (IWebDriver)featureContext[driver];
+            return scenarioContext[CurrentPage] as BasePage;
         }
     }
 }
