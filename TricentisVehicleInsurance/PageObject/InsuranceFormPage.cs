@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 using TricentisVehicleInsurance.ElementObjects;
+using TricentisVehicleInsurance.Globals;
 
 namespace TricentisVehicleInsurance.PageObject
 {
@@ -12,6 +14,14 @@ namespace TricentisVehicleInsurance.PageObject
     public abstract class InsuranceFormPage : BasePage
     {
         public InsuranceFormHeader Header { get; }
+        public bool HasErrors
+        {
+            get
+            {
+                var errors = ObjectRepo.WebDriver.FindElements(By.ClassName("error"));
+                return errors.Any(e => e.Displayed);
+            }
+        }
         public InsuranceFormPage() : base()
         {
             Header = new InsuranceFormHeader();

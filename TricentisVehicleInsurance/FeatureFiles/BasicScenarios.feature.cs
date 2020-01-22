@@ -106,7 +106,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("User opens browser to Insurance Webpage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("User clicks Automobile insurance link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.And("User clicks Automobile insurance link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
  testRunner.Then("The first page of the quote form is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -147,10 +147,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("User opens browser to Insurance Webpage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 12
- testRunner.When("User clicks Automobile insurance link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.And("User clicks Automobile insurance link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 13
-  testRunner.And(string.Format("User enters Make \"{0}\"", make), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When(string.Format("User enters Make \"{0}\"", make), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 14
   testRunner.And(string.Format("User enters Engine Performance \"{0}\"", performance), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -175,6 +175,51 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 21
  testRunner.Then("No fields are marked as invalid", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User Enters valid and invalid mileage")]
+        [NUnit.Framework.TestCaseAttribute("3000", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("50", "true", null)]
+        [NUnit.Framework.TestCaseAttribute("200000", "true", null)]
+        public virtual void UserEntersValidAndInvalidMileage(string mileage, string should, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User Enters valid and invalid mileage", null, exampleTags);
+#line 27
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 28
+ testRunner.Given("User opens browser to Insurance Webpage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 29
+  testRunner.And("User clicks Automobile insurance link", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 30
+ testRunner.When(string.Format("user enters Mileage \"{0}\"", mileage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 31
+ testRunner.Then(string.Format("An error \"{0}\" be displayed", should), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

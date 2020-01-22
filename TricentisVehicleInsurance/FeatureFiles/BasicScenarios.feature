@@ -4,13 +4,13 @@
 @mytag
 Scenario: Open Insurance Quote Form
 	Given User opens browser to Insurance Webpage
-	When User clicks Automobile insurance link
+		And User clicks Automobile insurance link
 	Then The first page of the quote form is displayed
 
 Scenario Outline: User Enters Vehicle Data
 	Given User opens browser to Insurance Webpage
-	When User clicks Automobile insurance link
-		And User enters Make "<Make>"
+		And User clicks Automobile insurance link
+	When User enters Make "<Make>"
 		And User enters Engine Performance "<Performance>"
 		And User enters Date of Manufacture "<Date>"
 		And User enters Number of Seats "<Seats>"
@@ -23,3 +23,14 @@ Examples:
 	| Make | Performance | Date       | Seats | Fuel | Price | LicensePlate | Mileage |
 	| Audi | 120         | 01/01/2010 | 2     | Gas  | 30000 | W2312GF      | 20000   |
 	| BMW  | 120         | 01/01/2010 | 2     | Gas  | 30000 | W2312GF      | 20000   |
+
+Scenario Outline: User Enters valid and invalid mileage
+	Given User opens browser to Insurance Webpage
+		And User clicks Automobile insurance link
+	When user enters Mileage "<Mileage>"
+	Then An error "<Should>" be displayed
+Examples:
+	| Mileage | Should |
+	| 3000    | false  |
+	| 50      | true   |
+	| 200000  | true   |

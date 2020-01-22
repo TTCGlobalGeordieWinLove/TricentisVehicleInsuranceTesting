@@ -35,7 +35,7 @@ namespace TricentisVehicleInsurance.StepDefinitions
             ObjectRepo.WebDriver.NavigateToUrl(ObjectRepo.ConfigReader.GetUrl());
         }
 
-        [When(@"User clicks Automobile insurance link")]
+        [Given(@"User clicks Automobile insurance link")]
         public void WhenUserClicksAutomobileInsuranceLink()
         {
             var page = new BasePage();
@@ -132,5 +132,13 @@ namespace TricentisVehicleInsurance.StepDefinitions
             var page = scenarioContext.GetCurrentPage() as AutomobileVehicleData;
             page.Form.Displayed.Should().BeTrue();
         }
+
+        [Then(@"An error ""(.*)"" be displayed")]
+        public void ThenAnErrorBeDisplayed(bool shown)
+        {
+            var page = scenarioContext.GetCurrentPage() as AutomobileVehicleData;
+            page.HasErrors.Should().Be(shown);
+        }
+
     }
 }
